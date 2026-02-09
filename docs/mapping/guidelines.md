@@ -1,3 +1,7 @@
+<div style="text-align: center;">
+  <img src="/kzmapping.png" alt="Mapping Guidelines" style="max-width: 700px; display: block; margin: 0 auto 20px;">
+</div>
+
 # Mapping Guidelines
 
 The aim of this document is to help guide new and experienced mappers towards improving the quality of their CS2KZ maps in preparation for global map approval. Following this guide will provide insight and resolutions to issues that may prevent your map from being approved. This document is written under the assumption that you have previous experience using the Hammer map editor.
@@ -6,12 +10,19 @@ The aim of this document is to help guide new and experienced mappers towards im
 
 In Source 2, the world and its objects are mesh based. This differs from Source 1's brush system whereby the world is built with 'blocks'. The new mesh based system offers a far more intuitive approach to building your map however will require some background research if you're coming from Source 1. It is highly recommended that you move towards this new system if you haven't already since many optimisation issues previously manageable within Source 1 will not work the same way and can lead to later visual issues under Source 2's mesh based system.
 
-## Useful software/sites
+## Useful assets
 
+- [CS2KZ Mapping API](https://github.com/KZGlobalTeam/cs2kz-metamod/wiki/Mapping-API)
 - [Source2Viewer](https://source2viewer.com/), used for decompiling CSGO and CS2 assets.
-- [source2.wiki](https://www.source2.wiki/CommunityGuides/installS2Sdk?game=cs2), wiki
-- [developer.valvesoftware.com](https://developer.valvesoftware.com/wiki/Source_2/Docs), wiki
-- [Text .vmat generator](https://jakkekz.github.io/fuk-point_worldtext/), made by jakke
+- [Source2.wiki](https://www.source2.wiki/CommunityGuides/installS2Sdk?game=cs2), wiki
+- [Developer.valvesoftware.com](https://developer.valvesoftware.com/wiki/Source_2/Docs), wiki
+- [CS2KZ Mapping](https://github.com/zer0k-z/cs2kz-mapping), launchers by zer0.k
+- [Text .vmat generator](https://jakkekz.github.io/fuk-point_worldtext/), by jakke
+- [CS2 Loading Screen Creator](https://github.com/jakkekz/cs2-loading-screen-stuff), by jakke
+- [Brian Vuksanovich's Youtube Channel](https://www.youtube.com/@brian-vuksanovich/videos)
+- [Source 2 101 - Hammer Crash Course Tutorials](https://www.youtube.com/@EagleOneDevelopmentTeam/videos), by Eagle One Development Team
+- [ReDMooNTV's CS2 Hammer series](https://www.youtube.com/watch?v=UJgoj2-8xkk&list=PLwcbHxIkIB3eRNVnDiwUDkKeECB_tbyKA), by ReDMooNTV
+- [Easter Lee's](https://github.com/EasterLee/easter_prefabs) underwater overlay and other particles.
 
 ## Lighting
 
@@ -98,6 +109,8 @@ Irregularly shaped rooms often force light probe volumes to overlap in awkward a
   <img src="/fadeprio.png" alt="FadeAndPriority" style="max-width: 600px; display: block; margin: 0 auto;">
   <p style="margin: 10px 0;"><em>11. Combined light probe with fade and priority</em></p>
 </div> 
+
+## VIS
 
 ## Texturing
 
@@ -232,34 +245,259 @@ Workarounds for this includes:
 - Replacing the lightprobes “cubemap texture” with the one from the 3d skybox. 
 - In the 3d skybox map right click your lightprobe and “Write Custom Cubemap…”, then select this .vtex file in the main map's lightprobe.
 If this is done, remember to set this lightprobes priority lower than other, otherwise other lightprobes on the map will bug out.
-Lightprobe configuration
-Lightprobe “ball” should be roughly on the same height and placement in both of the maps (3d skybox and main). You can move the ball with the “Pivot Manipulation tool”
-The lightprobe should be larger than the playable area (for example the skybox in the kz_avalon example.)
-Water Configuration
-Water can only be configured on new/decompiled water materials.
-SSR
-Right now SSR might be the best solution for reflections on these maps.
-Downsides include:
-Reflects what the user sees (no undersides or backsides for example)
-Things moving off the camera will flicker and get distorted
-SSR has a lot of configurable values in the material editor after being enabled.
-Water Fade
-The idea of water fade is to help with the transition between the main map’s water and the 3d skybox’ water.
-These sliders configure the waters fade https://i.imgur.com/Ex63NWr.png
-Other settings such as reflectance and glossiness can also help with the transition but it makes the water uglier.
-Fog can help cover the fade but adds a circle of fog which is quite noticeable
 
+- Light probe configuration
+  - Light probe “ball” should be roughly on the same height and placement in both of the maps (3d skybox and main). You can move the ball with the “Pivot Manipulation tool”
+  - The lightprobe should be larger than the playable area (for example the skybox in the kz_avalon example.)
+- Water Configuration
+  - Water can only be configured on new/decompiled water materials.
+  - SSR
+    - Right now SSR might be the best solution for reflections on these maps.
+    - Downsides include:
+       - Reflects what the user sees (no undersides or backsides for example)
+      - Things moving off the camera will flicker and get distorted
+    - SSR has a lot of configurable values in the material editor after being enabled.
+  - Water Fade
+    - The idea of water fade is to help with the transition between the main map’s water and the 3d skybox’ water.
+      
+    - These sliders configure the waters fade: 
 
+<div style="text-align: center;">
+  <img src="/waterfade.png" alt="WaterFade" style="max-width: 600px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Water fade sliders</em></p>
+</div>
 
-Word’s workshop map https://steamcommunity.com/sharedfiles/filedetails/?id=3555595971
-https://www.mediafire.com/file/n8mh5ddw7gmehyp/infinitewater.zip/file
+<div style="text-align: center;">
+  <img src="/avalon.png" alt="Avalon" style="max-width: 600px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>14. kz_avalon setup</em></p>
+</div>
 
+  - Other settings such as reflectance and glossiness can also help with the transition but it makes the water uglier.
 
-		
+  - Fog can help cover the fade but adds a radius of fog which is quite noticeable at higher elevations.
+
+<div style="display: flex; gap: 5px;">
+  <div style="flex: 1;">
+  <img src="/wordwater.png" alt="wordwater" style="max-width: 350px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>15. word's infinite water tutorial, <a href="https://discord.com/channels/452163833973440522/1171813934832046173/1409374472594526319">discord link</a></em></p>
+  </div>
+  <div style="flex: 1;">
+  <img src="/jakkewater.png" alt="jakkewater" style="max-width: 350px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>16. jakke's infinite water template, <a href="https://discord.com/channels/452163833973440522/1171813934832046173/1470094992453402726">discord link</a></em></p>
+  </div>
+</div>
+
 ### Particles
-Enabling particle editor
-https://developer.valvesoftware.com/wiki/Counter-Strike_2_Workshop_Tools/Particles
+
+The particle editor has to be enabled manually, follow [this](https://developer.valvesoftware.com/wiki/Counter-Strike_2_Workshop_Tools/Particles) tutorial.
+
 ### Sounds
-Encoding txt https://www.source2.wiki/CommunityGuides/encodingtxt?game=any
-Wav mp3
-Loop (wav looping with for example wavosaur) youtube links
+
+[Encoding txt](https://www.source2.wiki/CommunityGuides/encodingtxt?game=any)
+
+- Wav, mp3
+
+- Loop (wav looping with for example wavosaur) 
+
+[Counter Strike 2 Audio Academy](https://www.youtube.com/watch?v=6BqNhaPDi48&list=PLHSLq5FjjRw2zPKya7QVp62XPvQUu9k-O), by Eagle One Development Team
+
+[Custom Sounds on Hammer, Counter Strike 2, Source 2 full guide, looping sounds tutorial, area based.](https://youtu.be/xcILOV_eFCE?si=Rd26D8O4Gb3CaEyP), by Brian Vuksanovich
+
+## Gameplay
+
+- [CS2KZ Mapping API](https://github.com/KZGlobalTeam/cs2kz-metamod/wiki/Mapping-API)
+
+  - The CS2KZ Mapping API allows maps to communicate directly with the CS2KZ Metamod plugin using specific entity names and inputs in Hammer.
+
+- Major differences between CSGO and CS2 gameplay
+
+    - https://github.com/zer0k-z/cs2-movement-issues
+
+- If enough of the player is underwater and the player is standing on a floor, the player will not be able to jump, unlike CS:GO.
+  - Add ramps/ladders/triggers instead
+
+- Holding space while doing airstrafing movement when the player is on water will let the player accelerate to more than 200u/s (normal water speed) as they cycle between air movement and water movement. This is not possible in CS2, as the player does not pop up in the air at all.
+  - Use slide triggers instead.
+
+- 380 speed perfs are not a thing anymore. A normal perf is around 300 speed in CKZ.
+
+  - Theoretically a 301u lj is possible
+
+  - Theoretically anything over 325u should be a safe distance.
+
+  > [!WARNING]Keep in mind slides/surfs/triggers can be used to gain more max speed for a very long bhop.
+
+
+## Issues/bugs
+
+### 1. Backface shadows
+
+  - The cause of this bug is mostly unknown.
+
+  - Happens when a surface's backface is removed, especially around corners and edges.
+
+  - Seems to happen mostly if the sun entity is angled.
+
+  - Blocklight doesn’t work since its sharpness and opacity scales with lightmap resolution.
+
+  - Quick fixes include:
+
+    - Adding a backface at the problematic location.
+
+      - If this is done, it's wise to change the `lightmap resolution bias` to -4 and perhaps disabling `vis contributor` on those faces as they aren't meant to be seen.
+
+    - Remove the shadow property of the problematic face.
+
+<div style="text-align: center;">
+  <img src="/blocklight.png" alt="TriggerMesh" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>17. Blocklight shadow fades as the lightmap gets more populated.</em></p>
+</div>
+
+### 2. Things render through toolsskybox use moondome
+
+- Use moondome
+
+### 3. No generic reflections on playermodels/props
+
+- Add proper env_combined_light_probe_volume
+
+### 4. Slide triggers need to be fat and wide especially on smaller blocks to ensure proper contact? 
+
+### 5. (mostly) Non merged edges can shine/bleed light through non-existent gaps.
+
+  - Shadow bleed is also a thing to keep in mind.
+
+<div style="text-align: center;">
+  <img src="/lightbleed.png" alt="Light bleed" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>18. Light bleed caused by unknown factor.</em></p>
+</div>
+
+### 6. Visible edges/lines on a surface.
+  - especially common on lower light resolution compiles with simple surface materials
+
+<div style="text-align: center;">
+  <img src="/lines.png" alt="VisibleEdges" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>19. Edge on a surface clearly visible.</em></p>
+</div>
+
+
+### 7. VIS
+
+### 8. Func_brush tends to act weirdly.
+
+### 9. Trigger physics type needs to be set to “mesh” to not deform if not square.
+
+<div style="text-align: center;">
+  <img src="/triggermesh.png" alt="TriggerMesh" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>20. L shaped trigger with different physics types</em></p>
+</div>
+
+### 10. Having multiple .vpk packed ends with the user loading into the alphabetically first .vpk.
+
+### 11. Broken env_combined_light_probe_volume.
+
+  - Try recompiling the map or replacing combined light probes until it works.
+
+<div style="text-align: center;">
+  <img src="/buglightprobe.png" alt="BuggedLightprobe" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>21. Broken env_combined_light_probe_volume.</em></p>
+</div>
+
+### 12. Having multiple env_combined_light_probe_volume entities with custom “cubemap texture” can be buggy.
+
+  - Try changing the priority settings.
+
+### 13. Custom fonts won't be packed into the workshop map.
+
+### 14. 3D Skyboxes need to be recompiled to update in the main map.
+
+### 15. Emissive materials can cause light artifacts
+
+  - Most noticeable in darker areas.
+
+  - Disable “emissive lightning” and use postprocessing bloom and light entities.
+
+<div style="text-align: center;">
+  <img src="/emissivefail.png" alt="Emissive fail" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Light artifacts caused by an emissive material being the main light source.</em></p>
+</div>
+
+### 16. MSAA multisampling options render a line at the horizon of an infinite water 3d skybox illusion.
+
+  - CMAA2 and None work fine.
+
+<div style="display: flex; gap: 15px;">
+  <div style="flex: 1;">
+    <img src="/8xmsaa.png" alt="8x MSAA" style="width: 100%; display: block;">
+    <p style="text-align: center; margin: 10px 0;"><em>4. Infinite water with 8x MSAA setting</em></p>
+  </div>
+  <div style="flex: 1;">
+    <img src="/cmaa2.png" alt="CMAA2" style="width: 100%; display: block;">
+    <p style="text-align: center; margin: 10px 0;"><em>5. Infinite water with CMAA2 setting</em></p>
+  </div> 
+</div>
+
+### 17. During mesh work you might encounter red edges. This means you have bad faces.
+
+  - Right click a face nearby and "Remove Bad Faces".
+
+<div style="text-align: center;">
+  <img src="/badfaces.png" alt="Bad faces" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Bad faces caused by improper mesh work.</em></p>
+</div>
+
+### 18. Improperly packing materials will cause users to crash.
+
+  - This only seems to happen on the workshop version on a non listen server environment.
+
+<div style="text-align: center;">
+  <img src="/materialerror.png" alt="Material error" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Crashed game caused by missing material.</em></p>
+</div>
+
+### 19. When following online source 2 tutorials, be aware that some methods or entities may not work in the CS2 version of Hammer.
+
+  - For example, `volumetric_fog` is unavailable in CS2 but available in Alyx.
+
+## Nice to haves
+
+### 1. `team_select` entity
+
+  - Places camera at a specific place during selecting teams
+
+### 2. Custom loading screens
+
+<div style="text-align: center;">
+  <img src="/loadingscreen.png" alt="Loading screen" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Custom loading screen.</em></p>
+</div>
+
+[CS2 Loading Screen Creator](https://github.com/jakkekz/cs2-loading-screen-stuff), by jakke
+
+[Change Loading Map Screens in Counter Strike 2, Hammer Mapping tutorial, Source 2 guide.](https://www.youtube.com/watch?v=P9oxDXHoV9o), by Brian Vuksanovich
+
+## Tips and Tricks
+
+1. If the geometry is mostly unchanged VIS doesn't need to be recompiled.
+
+    - You know you need to compile VIS if things start bugging out.
+
+2. Enable "Tabbed Mode" in "Window" to easily swap between .vmap files.
+
+<div style="text-align: center;">
+  <img src="/tabbedmode.png" alt="Tabbed Mode" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Tabbed mode.</em></p>
+</div>
+
+3. Use instances
+
+    - Instances are ideal for repetitive elements or objects that are copy-pasted throughout the map. Using them keeps your project organized and allows you to make global changes to all copies simultaneously by editing a single object.
+
+    - To create an instance, select your objects, right-click, and choose "Selected Objects" and "Create Instance" or use the shortcut Ctrl + Shift + G.
+
+      - Instances have to be edited inside the "instance editor"
+
+<div style="text-align: center;">
+  <img src="/instaces.gif" alt="Instances" style="max-width: 400px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>13. Ladder group instance.</em></p>
+</div>
