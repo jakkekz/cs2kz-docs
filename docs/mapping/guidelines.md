@@ -219,7 +219,7 @@ In CS:GO, visibility was managed by converting geometry into `func_detail`. Sour
 
 > 
 > [!WARNING]
-> Objects can render through toolsskybox, use ``Moondome``. This is caused by broken VIS.
+> Objects can render through ``toolsskybox``, use ``Moondome`` instead. This is caused by broken VIS.
 
 [Counter-Strike 2 Hammer - Basic Map Optimisations (compile time)](https://www.youtube.com/watch?v=VGxPXnGJ0wM), by ReDMooNTV
 
