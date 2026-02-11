@@ -179,7 +179,7 @@ Irregularly shaped rooms often force light probe volumes to overlap awkwardly th
 
 The primary function of VIS is to determine what is visible to the player from any given position. If an object is a non-vis contributor, the engine will still render everything behind it, which can severely impact performance. To prevent this, structural geometry such as walls, floors and ceilings should be kept as vis contributors.
 
-VIS is calculated during the map's compilation phase and, along with lighting, is one of the most resource-intensive parts of the process. Poor optimization can cause compile times to skyrocket. VIS functions most efficiently with simple "boxes" and straight surfaces, problems arise when you add complex details inside a room. These detailed elements should be set as non-vis contributors.
+VIS is calculated during the map's compilation phase and, along with lighting, is one of the most resource-intensive parts of the process. Poor optimization can cause compile times to skyrocket. VIS functions most efficiently with simple "boxes" and straight surfaces. Adding more complex geometry inside a room will therefore hinder this process. Detailed elements should be separate objects set as non-vis contributors ( Image 20).
 
 In technical terms, VIS operates using cubes called voxels. These voxels fill the playable space, "communicating" with one another to determine line-of-sight and visibility.
 
@@ -196,7 +196,7 @@ To visualize which objects in your map are currently affecting visibility, click
   <p style="margin: 10px 0;"><em>19. "Visibility contributors view" button</em></p>
 </div> 
 
-In CS:GO, visibility was managed by converting geometry into `func_detail`. Source 2 follows a similar logic, but the workflow depends on the asset type. While models are non-vis contributors by default, mesh geometry must be manually configured. To prevent a mesh from affecting visibility, you must enable the `Not a Vis Contributor` setting within the mesh's properties.
+In Source 1, visibility was managed by converting geometry into `func_detail`. Source 2 follows a similar logic, but the workflow depends on the asset type. While props are non-vis contributors by default, mesh objects must be manually configured. To prevent a mesh from affecting visibility, you must enable the `Not a Vis Contributor` setting within the object properties.
 
 <div style="text-align: center;">
   <img src="/nonvis.png" alt="nonvis" style="max-width: 400px; display: block; margin: 0 auto;">
@@ -215,11 +215,11 @@ In CS:GO, visibility was managed by converting geometry into `func_detail`. Sour
 </div>
 
 > [!NOTE]
->If the geometry is mostly unchanged VIS doesn't need to be recompiled. You know you need to compile VIS if things start glitching in and out of vision.
+>Given you have the core geometry of your map finished, you only need to calculate VIS once to compile your map. This allows you to reduce compile times substantially when testing non-VIS related elements. However, making any change to the core geometry of your map will cause your map to leak. To resolve these leaks you should recompile VIS. 
 
 > 
 > [!WARNING]
-> Objects can render through ``toolsskybox``, use ``Moondome`` instead. This is caused by broken VIS.
+> Unlike Source 1 the ``toolsskybox`` material does not occlude objects outside the world mesh. If required you will need to create a new material with the ``Moondome shader`` using the same skybox texture as your ``env_sky`` entity.
 
 [Counter-Strike 2 Hammer - Basic Map Optimisations (compile time)](https://www.youtube.com/watch?v=VGxPXnGJ0wM), by ReDMooNTV
 
@@ -227,7 +227,9 @@ In CS:GO, visibility was managed by converting geometry into `func_detail`. Sour
 
 ## Texturing
 
-Similarly to lighting, the textures you choose can create the atmosphere of your map and also impact the gameplay. 
+Textures can turn raw-geometry into a living breathing world. Fortunately making your own textures is easier than ever with Source 2 offering far more intuitive and complex texture manipulation. This provides you with an opportunity to develop a unique style which will make your map stand out from others.
+
+While there are no standards for the aesthetic of your map, there is an expectation that your textures should not impact visibility and maintain a degree cohesion. Try to keep a consistent resolution for each texture where possible, align patterned materials with adjacent patterned materials, and ensure surfaces adopt their expected properties (walking on grass should sound like grass).  
 
 ### Custom Texturing and Materials
 Custom textures and materials can be added to your addon using the material editor. To add a new texture/material you will need to create a new .vmat file. To create a .vmat file simply open the material editor, press new and save the file within “csgo_addons/your_addon/materials/”. You must save the file before you can edit it! 
