@@ -28,11 +28,11 @@ Avoid employing a "jumps along a wall" design where the player simply follows a 
 
 ## Meshes
 
-In Source 2, the world and its objects are mesh based. This differs from Source 1's brush system whereby the world is built with "blocks". The new mesh based system offers a far more intuitive approach to building your map however will require some background research if you're coming from Source 1. 
+In Source 2, the world and its objects are mesh based. This differs from Source 1's brush system whereby the world is built with "blocks". In simple terms this means that a map should be designed as a single continous hollow object rather than a space enclosed by a series of solid objects. The new mesh based system offers a far more intuitive approach to building your map however will require some background research to if you're coming from Source 1.
 
 It is highly recommended that you move towards this new system if you haven't already since many optimisation issues previously manageable within Source 1 will not work the same way and can lead to later visual issues under Source 2's mesh based system.
 
-Maintaining a clean workflow saves you from a lot of troubleshooting later.
+Maintaining a clean workflow saves you from a lot of troubleshooting later. 
 
 > [!WARNING]
 > - When working with a mesh work you may encounter red edges. This means you have "bad" faces. Right click a nearby face and ``Remove Bad Faces`` to resolve.
@@ -56,7 +56,7 @@ Lighting helps to build an atmospheric and immersive world, it also plays a majo
 
 [`light_environment`](https://developer.valvesoftware.com/wiki/Light_environment_(Source_2)) for sunlight will in most cases provide adequate lighting, however it's worth trying different angles, brightness and colour for the light to see what looks the best.
 
-In shaded areas of your map, it may be necessary to incorporate a secondary light source to provide better visibility, however in doing so, it is recommended that the light is complimented by a source such as a candle or light bulb prop. The [`light_omni2`](https://developer.valvesoftware.com/wiki/Light_omni2) entity is standard for generic light sources. For more intrticate light shapes you can use a [`light_barn`](https://developer.valvesoftware.com/wiki/Light_barn) or [``light_rect``](https://developer.valvesoftware.com/wiki/Light_rect) entity. To create dynamic lighting effects, within the object properties, set the direct lighting type to 'dynamic' and set a 'style'.  can be used for square or larger areas.
+In shaded areas of your map, it may be necessary to incorporate a secondary light source to provide better visibility, however in doing so, it is recommended that the light is complimented by a source such as a candle or light bulb prop. The [`light_omni2`](https://developer.valvesoftware.com/wiki/Light_omni2) entity is standard for generic light sources. For more intricate light shapes you can use a [`light_barn`](https://developer.valvesoftware.com/wiki/Light_barn) or [``light_rect``](https://developer.valvesoftware.com/wiki/Light_rect) entity. To create dynamic lighting effects, within the object properties of the light entity, set the direct lighting type to 'dynamic' and set a 'style'.
 
 <div style="display: flex; gap: 5px;">
   <div style="flex: 1;">
@@ -79,7 +79,7 @@ When testing your lights, changing your 3d view port to **GPU Reference Path Tra
 </div>
 
 > [!WARNING]
-> Light and shadows may occasionally bleed through both merged and unmerged edges
+> - Light and shadows may occasionally bleed through both merged and unmerged edges. This is a bug which often occurs for faces with sharp angles (less than 45 degrees), although it can also occur without an apparent cause.
 
 <div style="text-align: center;">
   <img src="/lightbleed.png" alt="Light bleed" style="max-width: 400px; display: block; margin: 0 auto;">
@@ -99,7 +99,7 @@ With this in mind you also want to avoid calculating lighting for areas of the m
 
 > [!WARNING]
 >
-> Unexpected edges or lines on a surface, discoloured textures and shadows without visible sources may indicate that a higher lightmap resolution is required.
+> - Unexpected edges or lines on a surface, discoloured textures and shadows without visible sources may indicate that a higher lightmap resolution is required.
 
 <div style="text-align: center;">
   <img src="/lines.png" alt="VisibleEdges" style="max-width: 400px; display: block; margin: 0 auto;">
@@ -258,7 +258,8 @@ To visualize which objects in your map are currently affecting visibility, click
 
 > 
 > [!WARNING]
-> - Unlike Source 1 the ``toolsskybox`` material does not occlude objects outside the world mesh. If required you will need to create a new material with the ``Moondome shader`` using the same skybox texture as your ``env_sky`` entity.
+> - The ``toolsnodraw`` material should not be used to 'seal' your map like you would in Source 1. This will cause a VIS leak.
+> - Whilst the ``toolsskybox`` can still be used to seal the sky of your map, this material no longer occludes objects outside the world mesh. If required you will need to use create and employ a new material with the ``Moondome shader`` using the same skybox texture as your ``env_sky`` entity.
 
 ### Learn more:
 
@@ -445,21 +446,25 @@ The particle editor has to be enabled manually, follow [this](https://developer.
 [Custom Sounds on Hammer, Counter Strike 2, Source 2 full guide, looping sounds tutorial, area based.](https://youtu.be/xcILOV_eFCE?si=Rd26D8O4Gb3CaEyP), by Brian Vuksanovich
 
 ## Gameplay
+ Core KZ gameplay elements such as bunnyhop and teleport triggers are now easily implemented using zer0.k's [CS2KZ Mapping API](https://github.com/KZGlobalTeam/cs2kz-metamod/wiki/Mapping-API). Vist zer0.k's [cs2kz-mapping](https://github.com/zer0k-z/cs2kz-mapping) to install these CS2KZ Mapping API features.
 
-- [CS2KZ Mapping API](https://github.com/KZGlobalTeam/cs2kz-metamod/wiki/Mapping-API)
+ Ensure that your map follows the global map standards if you wish to have your map approved for the global leaderboards.
+ GLOBAL STANDARDS HERE?
 
-  - The CS2KZ Mapping API allows maps to communicate directly with the CS2KZ Metamod plugin using specific entity names and inputs in Hammer.
+ > [!WARNING]
+ Physics boundaries for triggers are not determined by the shape of their mesh by default. Instead physical boundaries for triggers are defined by their total width and length (object boundary). This makes any trigger with a complex shape redundant. To resolve, select the trigger in mesh mode, then within the mesh properties change physics type to 'mesh'.
 
-- Holding space while doing airstrafing movement when the player is on water will let the player accelerate to more than 200u/s (normal water speed) as they cycle between air movement and water movement. This is not possible in CS2, as the player does not pop up in the air at all.
-  - Use slide triggers instead.
+ ### Nuances of CS2KZ gameplay
+- Pre-gain from walls.
+- W-pre only.
+- Water tech no longer works in CS2. In CS:GO, holding space while airstrafing on water will accelerate the player to more than 200u/s (normal water speed) as they cycle between air movement and water movement. This is not possible in CS2 as the player does not pop up in the air at all. Using a slide trigger will provide a similar effect.
 
-- 380 speed perfs are not a thing anymore. A normal perf is around 290 speed in CKZ.
+- You can no longer achieve a 380 speed perfs. A normal perf is around 290 speed in CKZ.
+- Theoretically the maximum possible long jump distance is 301u.
+- Theoretically anything over 325u should be a safe distance.
 
-  - Theoretically a 301u lj is possible
-
-  - Theoretically anything over 325u should be a safe distance.
-
-  > [!WARNING]Keep in mind slides/surfs/triggers can be used to gain more max speed for a very long bhop.
+  > [!WARNING]
+  > Keep in mind slides/surfs/triggers can be used to gain more max speed for a very long bhop.
 
 - Danvari distance varies between 7u and 11u?
 
@@ -467,21 +472,13 @@ The particle editor has to be enabled manually, follow [this](https://developer.
 
 ### 1. Backface shadows
 
-  - The cause of this bug is mostly unknown.
+This is a bug introduced after the Animgraph 2 update causing certain faces to draw false or incomplete shadows. This is likely due to the backfaces of certain materials not blocking light. This may also occur when a surface's backface is removed, especially around corners or edges or when a ``light_enviroment`` entity is positioned at an angle other than default. While the toolsblocklight material is intended to resolve this issue, it doesn’t work in all cases since its sharpness and opacity scales with lightmap resolution (image X)
 
-  - Happens when a surface's backface is removed, especially around corners and edges.
+Currently, the simplest way of resolving backface shadows is to disable shadow casting for the problematic face. If the face casting incorrect shadows is a VIS-contributor you will need to make a "dummy face". First retexture the surface of the problematic face with the toolsnodrawmaterial. Then create the new dummy face by copying the original face and using paste special (ctrl+shift+V). For the new dummy face, within object properties enable "Not a vis contributor", disable shadow casting, and retexture the material to match the original surface. Be careful to ensure you do not disable VIS contribution for the world mesh.
 
-  - Seems to happen mostly if the sun entity is at another angle than default.
+By following this method, you are essentially sealing your map with a nodraw material for VIS, while the intended textured face acts as the real face for visual purposes.
 
-  - Blocklight doesn’t work in all cases since its sharpness and opacity scales with lightmap resolution (image X)
-
-  - Quick fixes include:
-  
-    - Remove the shadow property of the problematic face.
-
-    - Adding a backface at the problematic location.
-
-      - If this is done, it's wise to change the `Lightmap Resolution Bias` to ``-4`` and perhaps disabling `VIS contributor` if its not a vis contributor.
+- If this is done, it's wise to change the `Lightmap Resolution Bias` to ``-4`` and perhaps disabling `VIS contributor` if its not a vis contributor. WHY?
 
 <div style="text-align: center;">
   <img src="/bias.png" alt="lightmapbias" style="max-width: 550px; display: block; margin: 0 auto;">
@@ -509,11 +506,12 @@ The particle editor has to be enabled manually, follow [this](https://developer.
   <p style="margin: 10px 0;"><em>25. Blocklight shadow fades as the lightmap gets more populated.</em></p>
 </div>
 
-### 2. Slide triggers need to be fat and wide especially on smaller blocks to ensure proper contact? 
+### 2. Slide triggers need to be fat and wide especially on smaller blocks to ensure proper contact?
+Due to latency, slide trigger meshes should be larger than the associated blocks intended to be slided on. This prevents the 'slide' effect from registering late and nerfing the speed of the player. Simply extend the width of your slide triggers to overhang the blocks and raise the height of the trigger as much as possible relative to the confines of other gameplay elements.
 
 ### 3. Func_brush tends to act weirdly.
 
-### 4. Trigger ``physics type`` needs to be set to ``mesh`` to not deform if not square.
+
 
 <div style="text-align: center;">
   <img src="/triggermesh.png" alt="TriggerMesh" style="max-width: 400px; display: block; margin: 0 auto;">
