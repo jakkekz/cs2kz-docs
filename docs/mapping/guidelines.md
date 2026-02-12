@@ -391,7 +391,7 @@ If your skybox has six faces (back, down, front, left, right, up), you need to c
 
 #### `Csgo Moondome` 
 
-``Moondome`` is used because ``toolsskybox`` doesn’t work properly and renders things behind it. Moondomes are basically a material shader that acts like a proper skybox material. Keep in mind that it has collision on by default but this can be fixed by changing the Surface Property to ``Default Silent`` in the Attributes tab. This makes the moondome act like a clip by not leaving bullet marks but still acting like a wall that can’t be passed.
+Moondome is used because ``toolsskybox`` doesn’t work properly and renders things behind it. Moondomes are basically a material shader that acts like a proper skybox material. Keep in mind that it has a hitbox by default but this can be fixed by changing the Surface Property to ``Default Silent`` in the Attributes tab. This makes the moondome act like a clip by not having a hitbox but still acting like a wall that can’t be passed.
 "Cube Map texture" is the same texture as used for ``Sky``.
 
 > [!WARNING]
