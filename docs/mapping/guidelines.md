@@ -131,7 +131,7 @@ Light probes and cubemaps are required for your map and can be incorporated simu
 To implement lightprobes and cubemaps you should aim to place an [`env_combined_light_probe_volume`](https://developer.valvesoftware.com/wiki/Env_combined_light_probe_volume) in every room of your map. The origins of these entities should be positioned in the center of each room at player head height. You may need to adjust the position of the origin using the pivot manipulation tool (Insert key). For example if the room has multiple elevations, raising the entity origin to a height between the floor and the ceiling may create more accurate reflections. If an object is obstructing the ECLPV, ensure that the origin is not placed within or halfway through that object. After determining the location for the origin of the entity, the bounds should be extruded to encapsulate the entirety of the room. Recompile and you should now see reflections on your weapon models and the surfaces of your map.
 
 
-In some instances a seam will appear between two ECLPVs due to a difference between the lighting of each room. To soften the transition between the ECLPVs, within the object properties assign an edge fade distance of 8 or 16 units (image 13). When applying edge fade, ensure the ECLPV edges overlap by twice the distance of your edge fade distance to maintain a smooth blend (images 8, 9).  
+In some instances a seam will appear between two ECLPVs due to a difference between the lighting of each room. To soften the transition between the ECLPVs, within the object properties assign an edge fade distance of 8 or 16 units (image 13). When applying edge fade, ensure the ECLPV edges overlap by twice the distance of your edge fade distance to maintain a smooth blend (image 15).  
 
 <div style="text-align: center;">
   <img src="/fadeprio.png" alt="FadeAndPriority" style="max-width: 600px; display: block; margin: 0 auto;">
@@ -141,22 +141,29 @@ In some instances a seam will appear between two ECLPVs due to a difference betw
 <div style="display: flex; gap: 15px;">
   <div style="flex: 1;">
     <img src="/nofade.gif" alt="Fade" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>15. ECLPV without fade or overlap</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>14. ECLPV without fade or overlap</em></p>
   </div>
   <div style="flex: 1;">
     <img src="/yesfade.gif" alt="No fade" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>16. ECLPV with fade and overlap</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>15. ECLPV with fade and overlap</em></p>
   </div> 
 </div>
 
-When placing ECLPVs near walls, floors, or ceilings, extend the boundaries so the edge fade overlaps these surfaces. If the fade ends exactly at the wall, the lighting influence drops to zero, and the surface won't receive proper reflections or bounce light (image 5).
+When placing ECLPVs near walls, floors, or ceilings, extend the boundaries so the edge fade overlaps these surfaces. If the fade ends exactly at the wall, the lighting influence drops to zero, and the surface won't receive proper reflections or bounce light (image 11).
 
 <div style="text-align: center;">
   <img src="/lightprobe.png" alt="Artifacting" style="max-width: 600px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>14. ECLPVs encapsulating the rooms with edge fade and overlap</em></p>
+  <p style="margin: 10px 0;"><em>16. ECLPVs encapsulating the rooms with edge fade and overlap</em></p>
 </div>
 
-Irregularly shaped rooms often force ECLPVs to overlap awkwardly through walls into adjacent spaces. This will occasionally cause surfaces to sample the wrong ECLPVs. To fix this use the priority system to "force" the correct ECLPV to take precedent (image 11). Usually, you’ll want the ECLPV that best fits the specific room's shape or lighting to have the higher priority. 
+Irregularly shaped rooms often force ECLPVs to overlap awkwardly through walls into adjacent spaces. This will occasionally cause surfaces to sample the wrong ECLPVs. To fix this use the priority system to "force" the correct ECLPV to take precedent (image 13). Usually, you’ll want the ECLPV that best fits the specific room's shape or lighting to have the higher priority. 
+
+
+<div style="text-align: center;">
+  <img src="/probepuzzle.png" alt="Probepuzzle" style="max-width: 600px; display: block; margin: 0 auto;">
+  <p style="margin: 10px 0;"><em>17. A combined light probe "puzzle" with priorities mentioned</em></p>
+</div>
+
 
 > [!NOTE]
 > - When two or more env_combined_light_probe_volumes are set to the same priority, the engine will determine the priority based on the hierachy of the entity id.
@@ -164,11 +171,6 @@ Irregularly shaped rooms often force ECLPVs to overlap awkwardly through walls i
 > - Having multiple env_combined_light_probe_volume entities with custom “cubemap texture” can be buggy. Try changing the priority settings.
 >
 > - If a certain object is causing problematic reflections, the option "Render to Cubemaps" can be disabled in the objects properties.
-
-<div style="text-align: center;">
-  <img src="/probepuzzle.png" alt="Probepuzzle" style="max-width: 600px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>17. A combined light probe "puzzle" with priorities mentioned</em></p>
-</div>
 
 > [!WARNING]
 >- env_combined_light_probe_volume can sometimes break. Try recompiling the map or replacing combined light probes until it works again.
@@ -215,7 +217,7 @@ In Source 1, visibility was managed by converting geometry into [`func_detail`](
   <p style="margin: 10px 0;"><em>23. Object properties</em></p>
 </div> 
 
-VIS functions most efficiently with simple "boxes" and straight surfaces. Adding more complex geometry inside a room will therefore hinder this process. Detailed elements should be separate objects set as non-VIS contributors (image 20).
+VIS functions most efficiently with simple "boxes" and straight surfaces. Adding more complex geometry inside a room will therefore hinder this process. Detailed elements should be separate objects set as non-VIS contributors (image 23).
 
 In technical terms, VIS operates using cubes called voxels. These voxels fill the playable space, "communicating" with one another to determine line-of-sight and visibility.
 
@@ -454,7 +456,7 @@ Adding a ``team_select`` entity to your map will add team selection scene to you
 
 <div style="text-align: center;">
   <img src="/teamselectscreen.jpg" alt="Team Select Screen" style="max-width: 400px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>39. kz_madhatter team select screen</em></p>
+  <p style="margin: 10px 0;"><em>33. kz_madhatter team select screen</em></p>
 </div>
 
 ### 2. Custom loading screens
@@ -466,7 +468,7 @@ Custom loading screens, map icons and description can be added to your maps as a
 
 <div style="text-align: center;">
   <img src="/loadingscreen.png" alt="Loading screen" style="max-width: 400px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>40. Custom loading screen</em></p>
+  <p style="margin: 10px 0;"><em>34. Custom loading screen</em></p>
 </div>
 
 #### Learn more:
@@ -481,7 +483,7 @@ Start and end zones should be clearly visible to the player. A self-illuminated 
 
   <div style="flex: 1;">
     <img src="/startandend.png" alt="backfacefixed.png" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>41. Start and End zone</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>35. Start and End zone</em></p>
   </div> 
 
 
@@ -491,7 +493,7 @@ Start and end zones should be clearly visible to the player. A self-illuminated 
 
 <div style="text-align: center;">
   <img src="/gradient.png" alt="Gradient" style="max-width: 400px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>42. Gradient</em></p>
+  <p style="margin: 10px 0;"><em>36. Gradient</em></p>
 </div>
 
 2. Create a ``Csgo_Complex`` shader material with ``Translucent`` and `Render Backfaces` enabled.
@@ -539,7 +541,7 @@ If you have removed a face from an object to save lightmap space, and that objec
 
 <div style="text-align: center;">
   <img src="/bias.png" alt="lightmapbias" style="max-width: 550px; display: block; margin: 0 auto">
-  <p style="margin: 10px 0;"><em>33. Lightmap Resolution Bias</em></p>
+  <p style="margin: 10px 0;"><em>38. Lightmap Resolution Bias</em></p>
 </div>
 
 In situations where a shadow shouldn't be visible. First attempt disabling shadow casting for the problematic object. If the face casting incorrect shadows is a VIS-contributor you will need to make a "dummy face". First retexture the surface of the problematic face with the toolsnodrawmaterial. Then create the new dummy face by copying the original face and using paste special (Ctrl+Shift+V). For the new dummy face, within object properties enable "Not a vis contributor", disable shadow casting, and retexture the material to match the original surface. Be careful to ensure you do not disable VIS contribution for the world mesh. 
@@ -547,22 +549,22 @@ In situations where a shadow shouldn't be visible. First attempt disabling shado
 <div style="display: flex; gap: 15px;">
   <div style="flex: 1;">
     <img src="/badshadows.png" alt="badshadows" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>34. Broken backface shadows</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>39. Broken backface shadows</em></p>
   </div>
   <div style="flex: 1;">
     <img src="/badshadow2.png" alt="badshadows2" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>36. Broken backface shadows</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>40. Broken backface shadows</em></p>
   </div> 
 </div>
 
 <div style="display: flex; gap: 15px;">
   <div style="flex: 1;">
     <img src="/backfacenotfixed.png" alt="backfacenotfixed.png" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>35. Broken shadows</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>41. Broken shadows</em></p>
   </div>
   <div style="flex: 1;">
     <img src="/backfacefixed.jpg" alt="backfacefixed.png" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>36. Fixed shadows (added non-VIS faces with -4 lightmap bias)</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>42. Fixed shadows (added non-VIS faces with -4 lightmap bias)</em></p>
   </div> 
 </div>
 
@@ -590,11 +592,11 @@ Ways of finding or fixing missing assets:
 <div style="display: flex; gap: 15px;">
   <div style="flex: 1;">
     <img src="/missingmaterial.png" alt="backfacenotfixed.png" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>35. Missing texture</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>43. Missing texture</em></p>
   </div>
   <div style="flex: 1;">
     <img src="/postprocessingbug.gif" alt="Broken post_processing_volume" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>38. Broken post_processing_volume due to a missing .vpost file</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>44. Broken post_processing_volume due to a missing .vpost file</em></p>
   </div> 
 </div>
 
@@ -618,7 +620,7 @@ For example, `volumetric_fog` is unavailable in CS2 but available in Half-Life: 
 
 <div style="text-align: center;">
   <img src="/tabbedmode.png" alt="Tabbed Mode" style="max-width: 400px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>43. Tabbed mode</em></p>
+  <p style="margin: 10px 0;"><em>45. Tabbed mode</em></p>
 </div>
 
 ### 2. Use instances
@@ -631,7 +633,7 @@ Instances have to be edited inside the instance editor by double clicking the in
 
 <div style="text-align: center;">
   <img src="/instaces.gif" alt="Instances" style="max-width: 400px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>44. Ladder instance</em></p>
+  <p style="margin: 10px 0;"><em>46. Ladder instance</em></p>
 </div>
 
  ### 3. Group objects
@@ -686,7 +688,7 @@ If this is done, remember to set this env_combined_light_probe_volume’s priori
 
 - ``env_combined_light_probe_volume`` configuration
   - The sphere should be roughly on the same height and placement in both of the maps (3d skybox and main). You can move the sphere with the “Pivot Manipulation tool”
-  - The env_combined_light_probe_volume should be larger than the playable area (image X)
+  - The env_combined_light_probe_volume should be larger than the playable area (image 48)
 - Water Configuration
   - Water can only be configured on new/decompiled water materials.
   - SSR
@@ -701,12 +703,12 @@ If this is done, remember to set this env_combined_light_probe_volume’s priori
 
 <div style="text-align: center;">
   <img src="/waterfade.png" alt="WaterFade" style="max-width: 600px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>45. Water fade sliders</em></p>
+  <p style="margin: 10px 0;"><em>47. Water fade sliders</em></p>
 </div>
 
 <div style="text-align: center;">
   <img src="/avalon.png" alt="Avalon" style="max-width: 600px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>46. kz_avalon setup (if toolsskybox worked as intended the skybox would probably have to cover whole main map's water)</em></p>
+  <p style="margin: 10px 0;"><em>48. kz_avalon setup (if toolsskybox worked as intended the skybox would probably have to cover whole main map's water)</em></p>
 </div>
 
   - Other settings such as reflectance and glossiness can also help with the transition but it makes the water *uglier*.
@@ -716,11 +718,11 @@ If this is done, remember to set this env_combined_light_probe_volume’s priori
 <div style="display: flex; gap: 5px;">
   <div style="flex: 1;">
   <img src="/wordwater.png" alt="wordwater" style="max-width: 350px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>47. word's infinite water tutorial, <a href="https://discord.com/channels/452163833973440522/1171813934832046173/1409374472594526319">discord link</a></em></p>
+  <p style="margin: 10px 0;"><em>49. word's infinite water tutorial, <a href="https://discord.com/channels/452163833973440522/1171813934832046173/1409374472594526319">discord link</a></em></p>
   </div>
   <div style="flex: 1;">
   <img src="/jakkewater.png" alt="jakkewater" style="max-width: 350px; display: block; margin: 0 auto;">
-  <p style="margin: 10px 0;"><em>48. jakke's infinite water template, <a href="https://discord.com/channels/452163833973440522/1171813934832046173/1470094992453402726">discord link</a></em></p>
+  <p style="margin: 10px 0;"><em>50. jakke's infinite water template, <a href="https://discord.com/channels/452163833973440522/1171813934832046173/1470094992453402726">discord link</a></em></p>
   </div>
 </div>
 
@@ -730,11 +732,11 @@ If this is done, remember to set this env_combined_light_probe_volume’s priori
 <div style="display: flex; gap: 15px;">
   <div style="flex: 1;">
     <img src="/8xmsaa.png" alt="8x MSAA" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>49. Infinite water with 8x MSAA setting</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>51. Infinite water with 8x MSAA setting</em></p>
   </div>
   <div style="flex: 1;">
     <img src="/cmaa2.png" alt="CMAA2" style="width: 100%; display: block;">
-    <p style="text-align: center; margin: 10px 0;"><em>50. Infinite water with CMAA2 setting</em></p>
+    <p style="text-align: center; margin: 10px 0;"><em>52. Infinite water with CMAA2 setting</em></p>
   </div> 
 </div>
 
@@ -746,8 +748,8 @@ If this is done, remember to set this env_combined_light_probe_volume’s priori
 - [Source2Viewer](https://source2viewer.com/): Tool for decompiling CSGO and CS2 assets from vpk packages.
 - [Valve Developer Community](https://developer.valvesoftware.com/wiki/Source_2/Docs): Official Source Engine wiki.
 - [Source2 Wiki](https://www.source2.wiki/CommunityGuides/installS2Sdk?game=cs2): Community wiki for S2 made by Angel, DoctorGurke and others.
-- [Text .vmat generator](https://jakkekz.github.io/fuk-point_worldtext/): Tool for generating custom text textures and overlays made by jakke
-- [CS2 Loading Screen Creator](https://github.com/jakkekz/cs2-loading-screen-stuff): Tool for creating map loading screen images made by jakke
+- [Text .vmat generator](https://jakkekz.github.io/fuk-point_worldtext/): Tool for generating custom text textures and overlays, made by jakke
+- [CS2 Loading Screen Creator](https://github.com/jakkekz/cs2-loading-screen-stuff): Tool for creating custom map loading sreens, made by jakke
 - [Eagle One Development Team Youtube Channel](https://www.youtube.com/@eagleonedevelopmentteam849/videos), Various tutorials covering the fundamentals of the Source 2 Hammer editor.
 - [Brian Vuksanovich's Youtube Channel](https://www.youtube.com/@brian-vuksanovich/videos): Various tutorials covering more niche features of Source 2.
 - [ReDMooNTV's CS2 Hammer series](https://www.youtube.com/watch?v=UJgoj2-8xkk&list=PLwcbHxIkIB3eRNVnDiwUDkKeECB_tbyKA), Various tutorials for Source 2 hammer by ReDMooNTV
