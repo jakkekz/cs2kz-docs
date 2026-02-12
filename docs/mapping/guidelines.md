@@ -294,7 +294,12 @@ Opening the variables tab allows you to change the interactive properties of the
 > [!WARNING]
 >* Texture resolutions must be a power of two (e.g., ``1024x2048``, ``1024x128`` or ``2048x2048``). Supported file formats include ``JPG``, ``PNG``, ``TGA``, and ``PSD``.
 >
->- Missing materials now cause users to crash on secure servers. A recent 'safeguard' change from Valve. This usually occurs when you assign a material to a face, then delete that material from your addon folder or don't place it inside ``YOUR_ADDON/materials``. This will not crash your client when running a listen server in insecure mode making it easy to miss until your map is tested on a dedicated server. 
+>* Texture resolutions should be capped at ``2048x2048`` to optimize file size.
+
+Missing materials now cause users to crash on secure servers. A recent 'safeguard' change from Valve. This usually occurs when you assign a material to a face, then delete that material from your addon folder or don't place it inside  
+``Counter-Strike Global Offensive\content\csgo_addons\YOUR_ADDON\materials``. 
+
+This will not crash your client when running a listen server in insecure mode making it easy to miss until your map is tested on a dedicated server. 
 
 <div style="text-align: center;">
   <img src="/materialerror.png" alt="Material error" style="max-width: 400px; display: block; margin: 0 auto;">
@@ -302,6 +307,8 @@ Opening the variables tab allows you to change the interactive properties of the
 </div>
 
 #### Learn more:
+
+[PBR Explained in 3 Minutes - Physically Based Rendering](https://www.youtube.com/watch?v=_ZbkOZNgwNk), by GarageFarm Academy
 
 [Counter-Strike 2 Hammer: Custom Textures / Materials (PNG images)](https://www.youtube.com/watch?v=1T-a3qfN_2c), by ReDMooNTV
 
