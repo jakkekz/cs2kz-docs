@@ -30,7 +30,7 @@ Avoid employing a "jumps along a wall" design where the player simply follows a 
 
 In Source 2, the world and its objects are mesh based. This differs from Source 1's brush system whereby the world is built with "blocks". In simple terms this means that a map should be designed as a single continous hollow object rather than a space enclosed by a series of solid objects. The new mesh based system offers a far more intuitive approach to building your map however will require some background research if you're coming from Source 1.
 
-It is highly recommended that you move towards this new system if you haven't already since many optimisation issues previously manageable within Source 1 will not work the same way and can lead to later visual issues under Source 2's mesh based system.
+It is highly recommended that you move towards this new system if you haven't already since many optimization issues previously manageable within Source 1 will not work the same way and can lead to later visual issues under Source 2's mesh based system.
 
 Maintaining a clean workflow saves you from a lot of troubleshooting later.
 
@@ -54,7 +54,7 @@ Maintaining a clean workflow saves you from a lot of troubleshooting later.
 
 Lighting helps to build an atmospheric and immersive world, it also plays a major role in the readability of your map. While the context changes from map to map, generally speaking this means that your lighting should strike a balance between being visually appealing and readable for gameplay. 
 
-[`light_environment`](https://developer.valvesoftware.com/wiki/Light_environment_(Source_2)) for sunlight will in most cases provide adequate lighting, however it's worth trying different angles, brightness and colour for the light to see what looks the best.
+[`light_environment`](https://developer.valvesoftware.com/wiki/Light_environment_(Source_2)) for sunlight will in most cases provide adequate lighting, however it's worth trying different angles, brightness and color for the light to see what looks the best.
 
 In shaded areas of your map, it may be necessary to incorporate a secondary light source to provide better visibility, however in doing so, it is recommended that the light is complimented by a source such as a candle or light bulb prop. The [`light_omni2`](https://developer.valvesoftware.com/wiki/Light_omni2) entity is standard for generic light sources. For more intricate light shapes you can use a [`light_barn`](https://developer.valvesoftware.com/wiki/Light_barn) or [``light_rect``](https://developer.valvesoftware.com/wiki/Light_rect) entity. To create dynamic lighting effects, within the object properties of the light entity, set the direct lighting type to 'dynamic' and set a 'style'.
 
@@ -99,7 +99,7 @@ With this in mind you also want to avoid calculating lighting for areas of the m
 
 > [!WARNING]
 >
-> - Unexpected edges or lines on a surface, discoloured textures and shadows without visible sources may indicate that a higher lightmap resolution is required.
+> - Unexpected edges or lines on a surface, discolored textures and shadows without visible sources may indicate that a higher lightmap resolution is required.
 
 <div style="text-align: center;">
   <img src="/lines.png" alt="VisibleEdges" style="max-width: 400px; display: block; margin: 0 auto;">
@@ -111,7 +111,7 @@ With this in mind you also want to avoid calculating lighting for areas of the m
 [Counter-Strike 2 Hammer - Basic Map Optimisations (compile time)](https://youtu.be/VGxPXnGJ0wM?si=XKQLfUU9U4Ijs_fJ&t=135), by ReDMooNTV
 
 ### Light probes and cubemaps
-Light probes and cubemaps are required for your map and can be incorporated simultaneously with the [`env_combined_light_probe_volume`](https://developer.valvesoftware.com/wiki/Env_combined_light_probe_volume) *(ECLPV)* entity. Light probes are required to create diffuse lighting on entities which cannot utilise direct lighting such as [``prop_dynamic``](https://www.source2.wiki/Entities/prop_dynamic?_highlight=prop_dynamic&game=any) entities. Cubemaps are required to create proper reflections for material surfaces and your view model. This is achieved by projecting a three dimensional image of a room onto the surfaces within the bounds of the entity.
+Light probes and cubemaps are required for your map and can be incorporated simultaneously with the [`env_combined_light_probe_volume`](https://developer.valvesoftware.com/wiki/Env_combined_light_probe_volume) *(ECLPV)* entity. Light probes are required to create diffuse lighting on entities which cannot utilize direct lighting such as [``prop_dynamic``](https://www.source2.wiki/Entities/prop_dynamic?_highlight=prop_dynamic&game=any) entities. Cubemaps are required to create proper reflections for material surfaces and your view model. This is achieved by projecting a three dimensional image of a room onto the surfaces within the bounds of the entity.
 
 <div style="display: flex; gap: 5px;">
   <div style="flex: 1;">
@@ -182,7 +182,7 @@ Irregularly shaped rooms often force ECLPVs to overlap awkwardly through walls i
 
 
 > [!DANGER]
-> - It has been [suggested](https://developer.valvesoftware.com/wiki/Counter-Strike_2_Workshop_Tools/Level_Design/Maps_Workshop/Post_Import_Fixup_steps#Cubemaps/Lightprobes) that edge fade may negatively impact performance. While we were not able to find clear evidence of a performance loss. Further testing could be conducted.
+> - It has been [suggested](https://developer.valvesoftware.com/wiki/Counter-Strike_2_Workshop_Tools/Level_Design/Maps_Workshop/Post_Import_Fixup_steps#Cubemaps/Lightprobes) that edge fade may negatively impact performance, while we were not able to find clear evidence of a performance loss. Further testing could be conducted.
 
 *Open in a new window to enlarge:*
 <div style="display: flex; gap: 15px;">
@@ -311,9 +311,9 @@ Material shaders are different customizable configurations for materials each wi
 
 This shader allows **PBR** layering for generic materials such as wall, floor and terrain surfaces.
 
-Although only a colour/texture file is required for the shader to function, you should aim to generate **normal** and **roughness** maps at a minimum to provide your materials with realistic topography and surface reflectivity.
+Although only a color/texture file is required for the shader to function, you should aim to generate **normal** and **roughness** maps at a minimum to provide your materials with realistic topography and surface reflectivity.
 
-If you’re planning to use a material texture which lacks other PBR layers, you can generate them yourself. For those who want fast results you can quickly generate these layers from a colour/diffuse texture using [NormalMap Online](https://cpetry.github.io/NormalMap-Online/) or [Materialize](https://github.com/maikramer/Materialize).
+If you’re planning to use a material texture which lacks other PBR layers, you can generate them yourself. For those who want fast results you can quickly generate these layers from a color/diffuse texture using [NormalMap Online](https://cpetry.github.io/NormalMap-Online/) or [Materialize](https://github.com/maikramer/Materialize).
 
 You can also generate the layers manually using an appropriate photo editing software such as Gimp, Photoshop or Blender.
 
@@ -384,7 +384,7 @@ Moondome is used because ``toolsskybox`` doesn’t work properly and renders thi
 "Cube Map texture" is the same texture as used for ``Sky``.
 
 > [!WARNING]
-> * When making moondomes it’s important to keep in mind that the Color setting is set to grey by default and should be changed to white to not have the moondome darker than the skybox.
+> * When making moondomes it’s important to keep in mind that the Color setting is set to gray by default and should be changed to white to not have the moondome darker than the skybox.
 
 #### `Refract` 
 
@@ -528,7 +528,7 @@ To do this, open the `Postprocessing Editor` and create a new ``.vpost`` file. S
 
 ### 1. Backface shadows
 
-Following the Animgraph 2 update, certain faces now draw false or incomplete shadows. This may occur when a surface is removed for optimisation purposes or a shadow is casted from one face behind another. While the ``toolsblocklight`` material is intended to resolve this issue, it does not work in all cases since the sharpness and opacity of this material scales with lightmap resolution.
+Following the Animgraph 2 update, certain faces now draw false or incomplete shadows. This may occur when a surface is removed for optimization purposes or a shadow is casted from one face behind another. While the ``toolsblocklight`` material is intended to resolve this issue, it does not work in all cases since the sharpness and opacity of this material scales with lightmap resolution.
 
 <div style="text-align: center;">
   <img src="/blocklight.png" alt="TriggerMesh" style="max-width: 550px; display: block; margin: 0 auto;">
